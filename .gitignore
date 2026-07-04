@@ -1,0 +1,24 @@
+# Токен бота — не коммитить
+config.py
+category_rules.json
+service_account.json
+*-service-account*.json
+botlion-501208-*.json
+b64_for_host.txt
+b64_part1.txt
+b64_part2.txt
+json_for_host.txt
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+env/
+
+# IDE / ОС
+.env
+.DS_Store
+Thumbs.db
