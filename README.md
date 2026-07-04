@@ -45,11 +45,14 @@ Telegram-бот вечернего отчёта — запись Excel в Google
 |------------|----------|
 | `BOT_TOKEN` | токен от @BotFather |
 | `GOOGLE_SPREADSHEET_ID` | ID таблицы |
-| `GOOGLE_SERVICE_ACCOUNT_JSON_B64_1` | первая половина base64 (см. ниже) |
-| `GOOGLE_SERVICE_ACCOUNT_JSON_B64_2` | вторая половина base64 |
+| `OTCHET_SA_B64_1` | первая половина base64 (из `b64_part1.txt`) |
+| `OTCHET_SA_B64_2` | вторая половина base64 (из `b64_part2.txt`) |
 | `DATA_DIR` | `/app/data` |
 
-**Не используйте** одну переменную `GOOGLE_SERVICE_ACCOUNT_JSON_B64` — на Bothost она обрезается.
+Используйте **`OTCHET_SA_B64_1` / `_2`** — новые имена, чтобы не конфликтовать со старой `GOOGLE_SERVICE_ACCOUNT_JSON_B64` на хосте.
+
+Старые имена `GOOGLE_SERVICE_ACCOUNT_JSON_B64_1/_2` тоже поддерживаются.  
+Если заданы части `_1`+`_2`, они **важнее** одной длинной `GOOGLE_SERVICE_ACCOUNT_JSON_B64`.
 
 Сгенерировать части локально:
 ```

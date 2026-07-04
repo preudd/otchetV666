@@ -74,16 +74,24 @@ def _service_account_file_path() -> str:
 
 
 def _get_b64_from_env() -> str:
-    single = os.environ.get("GOOGLE_SERVICE_ACCOUNT_JSON_B64", "").strip()
-    if single:
-        return single
+    """Сначала части (_1/_2) — если на хосте застряла битая GOOGLE_SERVICE_ACCOUNT_JSON_B64."""
     parts: list[str] = []
     for index in range(1, 10):
-        part = os.environ.get(f"GOOGLE_SERVICE_ACCOUNT_JSON_B64_{index}", "").strip()
-        if not part:
+        for prefix in ("OTCHET_SA_B64", "GOOGLE_SERVICE_ACCOUNT_JSON_B64"):
+            part = os.environ.get(f"{prefix}_{index}", "").strip()
+            if part:
+                parts.append(part)
+                break
+        else:
             break
-        parts.append(part)
-    return "".join(parts)
+    if parts:
+        return "".join(parts)
+
+    for name in ("OTCHET_SA_B64", "GOOGLE_SERVICE_ACCOUNT_JSON_B64"):
+        single = os.environ.get(name, "").strip()
+        if single:
+            return single
+    return ""
 
 
 def bootstrap_service_account_file() -> str | None:
@@ -240,6 +248,12 @@ def get_config_status() -> dict[str, str]:
     b64 = _get_b64_from_env()
     if file_exists:
         sa_source = "file"
+    elif os.environ.get("OTCHET_SA_B64_1", "").strip() or os.environ.get("GOOGLE_SERVICE_ACCOUNT_JSON_B64_1", "").strip():
+        sa_source = "env_b64_parts"
+    elif os.environ.get("OTCHET_SA_B64", "").strip():
+        sa_source = "env_otchet_b64"
+    elif os.environ.get("GOOGLE_SERVICE_ACCOUNT_JSON_B64", "").strip():
+        sa_source = "env_b64_legacy"
     elif b64:
         sa_source = "env_b64"
     elif json_raw:

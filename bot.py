@@ -35,7 +35,7 @@ from google_sheets import (
 )
 
 STATE_PICK_CATEGORY, STATE_WAIT_KEYWORD, STATE_PICK_DELETE_CATEGORY, STATE_PICK_DELETE_KEYWORD = range(4)
-APP_BUILD = "otchetV666-v1"
+APP_BUILD = "otchetV666-v2"
 
 
 async def _on_startup(application: Application) -> None:
