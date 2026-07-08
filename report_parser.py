@@ -300,15 +300,16 @@ def parse_excel_report(file_path):
                 category_sum['Вход безлимит'] += ls
                 continue
 
+            # --- Билет 2 часа ---
+            if match_rule(nl, rules["ticket_2hour"]):
+                category_qty['Билет 2час'] += qty
+                category_sum['Билет 2час'] += ls
+                continue
+
             # --- Билет 1 час ---
             if match_rule(nl, rules["ticket_1hour"]):
                 category_qty['Билет 1час'] += qty
                 category_sum['Билет 1час'] += ls
-                continue
-
-            if match_rule(nl, rules["ticket_2hour"]):
-                category_qty['Билет 2час'] += qty
-                category_sum['Билет 2час'] += ls
                 continue
 
             # --- Акции: по названию (без привязки к цене) ---

@@ -17,7 +17,10 @@ DEFAULT_RULES: Dict[str, Rule] = {
     # qty+sum categories (show "шт ... руб" in template)
     "ticket_unlimited": Rule(match_mode="any", keywords=["билет(безлимит)", "вход безлимит"]),
     "ticket_1hour": Rule(match_mode="any", keywords=["билет(1час)", "билет 1час"]),
-    "ticket_2hour": Rule(match_mode="any", keywords=["билет(2час)", "билет 2час", "билет(2 часа)", "билет 2 часа"]),
+    "ticket_2hour": Rule(
+        match_mode="any",
+        keywords=["2 часа", "2час", "билет(2час)", "билет 2час", "билет(2 часа)", "билет 2 часа"],
+    ),
     # Важно: не добавляем слишком общие слова типа "час" — иначе будет матчиться "3 часа" и т.п.
     "action_happy_hours": Rule(match_mode="any", keywords=["счастливые часы"]),
     "action_last_hour": Rule(match_mode="any", keywords=["последний час"]),
