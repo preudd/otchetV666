@@ -306,6 +306,11 @@ def parse_excel_report(file_path):
                 category_sum['Билет 1час'] += ls
                 continue
 
+            if match_rule(nl, rules["ticket_2hour"]):
+                category_qty['Билет 2час'] += qty
+                category_sum['Билет 2час'] += ls
+                continue
+
             # --- Акции: по названию (без привязки к цене) ---
             if match_rule(nl, rules["action_happy_hours"]):
                 category_qty['Акция счастливые часы'] += qty
@@ -454,6 +459,7 @@ def format_report(data, report_date=None):
 
 {qty_sum_line_nozeroqty("Вход безлимит", cq.get('Вход безлимит', 0), cs.get('Вход безлимит', 0))}
 {qty_sum_line("Билет 1час", cq.get('Билет 1час', 0), cs.get('Билет 1час', 0))}
+{qty_sum_line("Билет 2час", cq.get('Билет 2час', 0), cs.get('Билет 2час', 0))}
 {qty_sum_line_actions("Акция счастливые часы", cq.get('Акция счастливые часы', 0), cs.get('Акция счастливые часы', 0))}
 {qty_sum_line_actions("Акция последний час", cq.get('Акция последний час', 0), cs.get('Акция последний час', 0))}
 

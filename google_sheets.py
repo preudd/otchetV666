@@ -44,23 +44,23 @@ MONTH_SHEET_ALIASES: dict[int, list[str]] = {
 EMPLOYEES: dict[str, dict[str, Any]] = {
     "alina": {
         "label": "Алина",
-        "date_col": 23,  # W
-        "values_start_col": 24,  # X (Выручка) .. AI (Расчет др); AJ-AL — касса
+        "date_col": 24,  # X
+        "values_start_col": 25,  # Y .. AK; AL-AN — касса
     },
     "ilya": {
         "label": "Илья",
-        "date_col": 40,  # AN
-        "values_start_col": 41,  # AO .. AZ; BA-BC — касса
+        "date_col": 42,  # AP
+        "values_start_col": 43,  # AQ .. BC; BD-BF — касса
     },
     "kira": {
         "label": "Кира",
-        "date_col": 58,  # BF
-        "values_start_col": 59,  # BG .. BR; BS-BU — касса
+        "date_col": 61,  # BI
+        "values_start_col": 62,  # BJ .. BV; BW-BY — касса
     },
 }
 
-# W/X..AI, AN/AO..AZ, BF/BG..BR — 12 полей из Excel, без кассовых колонок
-VALUES_COUNT = 12
+# Y..AK, AQ..BC, BJ..BV — 13 полей (добавлен «2 часа»), без кассовых колонок
+VALUES_COUNT = 13
 
 DEFAULT_SA_FILENAME = "service_account.json"
 
@@ -465,6 +465,7 @@ def build_employee_values(data: dict) -> list[int | float]:
         _num(data.get("cash")),
         _num(data.get("receipt_count")),
         _num(cs.get("Билет 1час")),
+        _num(cs.get("Билет 2час")),
         _num(cs.get("Вход безлимит")),
         _num(cs.get("Акция счастливые часы")),
         _num(cs.get("Аквагрим")),
